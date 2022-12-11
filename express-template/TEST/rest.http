@@ -1,0 +1,40 @@
+###
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+    "username": "zinzo",
+    "email": "test01@gmail.com",
+    "password": "demo@123"
+}
+
+###
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "test@gmail.com",
+    "password": "demo@123"
+}
+
+###
+GET http://localhost:5000/api/users/current
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiemluem8iLCJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWQiOiI2Mzk1YTRjODZlYTczMWEzNmEwMjBmYjEifSwiaWF0IjoxNjcwNzUyNTg5LCJleHAiOjE2NzA3NTM0ODl9.KgW61_vj4dh89jAFs2LKezS9XoS3cEkfsAMKY4aG1PU
+Content-Type: application/json
+
+###
+GET http://localhost:5000/api/contacts HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiemluem8iLCJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWQiOiI2Mzk1YTRjODZlYTczMWEzNmEwMjBmYjEifSwiaWF0IjoxNjcwNzUyNTg5LCJleHAiOjE2NzA3NTM0ODl9.KgW61_vj4dh89jAFs2LKezS9XoS3cEkfsAMKY4aG1PU
+Content-Type: application/json
+
+
+###
+POST http://localhost:5000/api/contacts HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiemluem8iLCJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWQiOiI2Mzk1YTRjODZlYTczMWEzNmEwMjBmYjEifSwiaWF0IjoxNjcwNzUyNTg5LCJleHAiOjE2NzA3NTM0ODl9.KgW61_vj4dh89jAFs2LKezS9XoS3cEkfsAMKY4aG1PU
+Content-Type: application/json
+
+{
+    "name": "Zinzo",
+    "email": "test@gmail.com",
+    "phone": "0909111222"
+}
