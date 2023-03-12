@@ -1,0 +1,12 @@
+POST http://localhost:8000/api/v1/users/create HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "kent",
+    "lastName" : "test",
+    "email": "test@gmail.com"
+}
+
+### 
+GET http://localhost:8000/api/v1/users HTTP/1.1
+content-type: application/json

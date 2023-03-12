@@ -1,14 +1,16 @@
 import { Express, Request, Response, NextFunction } from 'express'
 import { middleware } from '../middleware';
 import { getBook } from '../controllers/books.controller'
-import todosRouter from './todos.route'
+import todosRouter from './todos.route';
+import usersRouter from './users.route'
 
 const routes = (app: Express) => {
-    app.use('/api/v1', todosRouter)
-
     app.get('/', (req: Request, res: Response) => {
         return res.send('Hello')
     })
+
+    app.use('/api/v1/todos', todosRouter);
+    app.use('/api/v1/users', usersRouter);
 
     app.post('/api/data', (req: Request, res: Response) => {
         console.log("Req", req.body)

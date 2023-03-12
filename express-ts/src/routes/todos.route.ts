@@ -6,10 +6,10 @@ import { createTodo, readTodos, readTodo, updateTodo, deteleTodo } from '../cont
 
 const router = express.Router();
 
-router.post('/todos/create', TodoValidator.checkCreateTodo(), handleValidationError, createTodo)
-router.get('/todos/read', TodoValidator.checkReadTodo(), handleValidationError, readTodos)
-router.get('/todos/read/:id', TodoValidator.checkIdParams(), handleValidationError, readTodo)
-router.put('/todos/update/:id', TodoValidator.checkUpdateTodo(), handleValidationError, updateTodo)
-router.delete('/todos/delete/:id', TodoValidator.checkIdParams(), handleValidationError, deteleTodo)
+router.post('/create', TodoValidator.checkCreateTodo(), handleValidationError, createTodo)
+router.get('/read', TodoValidator.checkReadTodo(), handleValidationError, readTodos)
+router.get('/read/:id', TodoValidator.checkIdParams(), handleValidationError, readTodo)
+router.put('/update/:id', TodoValidator.checkUpdateTodo(), handleValidationError, updateTodo)
+router.delete('/delete/:id', TodoValidator.checkIdParams(), handleValidationError, deteleTodo)
 
 export default router
