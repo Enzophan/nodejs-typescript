@@ -18,8 +18,6 @@ services:
       - example-net
     depends_on:
       - mongo
-    # links:
-    #   - "mongo:database"
     command: node dist/src/app.js
   mongo:
     image: mongo
