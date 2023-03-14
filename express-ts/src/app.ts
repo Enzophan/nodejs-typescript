@@ -1,4 +1,4 @@
-import express, { Express, NextFunction, Request, Response } from 'express';
+import express, { Express } from 'express';
 import db from './config/database.config'
 import routes from './routes';
 import mongoConnect from './config/mongo.connect';
@@ -19,7 +19,6 @@ const mongoURL = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/test";
 app.use(express.json())
 
 // app.use(express.urlencoded({ extended: true }))
-
 
 app.use(middlewareGlobal({ role: 'admin' }))
 

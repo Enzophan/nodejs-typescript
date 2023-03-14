@@ -1,18 +1,18 @@
-FROM node:14.18
+FROM node:14.18 as base
 
-WORKDIR /app
+WORKDIR /home/node/app
 
-COPY ./package.json ./
+COPY package*.json ./
 
-RUN npm install \ && npm install typescript -g
-
-# RUN npm install pm2 -g
+RUN npm i
 
 COPY . .
 
-RUN tsc
+ENV PORT=4000
 
-EXPOSE 8000
+# Using name of service
+ENV MONGO_URL=mongodb://mongo:27017/test
 
-# CMD ["pm2-runtime", "app.js"]
-CMD [ "node", "dist/src/app.js" ]
+ENV NODE_PATH=./dist
+
+RUN npm run build
