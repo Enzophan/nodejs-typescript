@@ -8,10 +8,8 @@ RUN npm i
 
 COPY . .
 
-ENV PORT=4000
-
 # Using name of service
-ENV MONGO_URL=mongodb://mongo:27017/test
+# ENV MONGO_URL=mongodb://mongo:27017/test
 
 ENV NODE_PATH=./dist
 

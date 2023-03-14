@@ -10,6 +10,7 @@ services:
       target: base
     environment: 
       - PORT=4000
+      - MONGO_URL=mongodb://mongo:27017/test #Using name of service
     expose:
       - '4000'
     ports:
