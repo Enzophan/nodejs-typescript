@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  node-app:
+    container_name: node-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./src:/home/node/app/src
+      - ./nodemon.json:/home/node/app/nodemon.json
+    restart: always
+    expose:
+      - '4000'
+    ports:
+      - '4000:4000'
+    command: npm run dev
+    links:
+      - "mongo:database"
+  mongo:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - ./data:/data/db
+    restart: always
+    ports:
+      - 27017:27017
