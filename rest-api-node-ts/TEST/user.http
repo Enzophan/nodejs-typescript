@@ -1,7 +1,7 @@
 GET http://localhost:4000/healthcheck HTTP/1.1
 
 ###
-POST http://localhost:4000/app/users HTTP/1.1
+POST http://localhost:4000/api/users HTTP/1.1
 content-type: application/json
 
 {
@@ -11,3 +11,19 @@ content-type: application/json
     "password": "demo1234",
     "passwordConfirmation": "demo1234"
 }
+
+###
+POST http://localhost:4000/api/sessions HTTP/1.1
+content-type: application/json
+
+{
+    "email": "test6@gmai.com",
+    "password": "demo1234"
+}
+
+###
+GET  http://localhost:4000/api/sessions HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE5ZTk0NjdjNDJhNTAxNGM3NmNlOTAiLCJlbWFpbCI6InRlc3Q2QGdtYWkuY29tIiwiZmlyc3RuYW1lIjoiU21pdGgiLCJsYXN0bmFtZSI6IldpbGwiLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTIxVDE3OjI4OjM4LjY4MFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTIxVDE3OjI4OjM4LjY4MFoiLCJfX3YiOjAsInNlc3Npb24iOiI2NDFiM2Y5NGZjYzM4MjA1OWY2ODUyYjQiLCJpYXQiOjE2Nzk1MDczNDgsImV4cCI6MTY3OTUwODI0OH0.UHxxkZ85gO3vPG3L2ZTQZlEutnFFhdFTE2nMykKTMYifHKHvDIgqqyGHFShDh13QivG2Av7AS_ir8N8BkwHmzm1mMV2r_MnP4nNsBHXpKcCiUTHlHhZkvsXSopUm1-aVpq2d8Heaw03aWONGE8kahSmMLzjdYNFoGZnGnXAXWNjFf8jli09nxuBXcR-ZPaR6exhDVxCb45QHQ6N4yHvFZSUB-IGhjm6pxegRabCI7P12x5pNOe9c0-eHe77QGwfBkhfOEhU0515q8VxNfPtNC8IyioqvBFy7BN5UzN8Ad0NPKSV8ruK1l_OzeTyMcl36yTurxP09ubwMAzSpGngYIRDVxXvV_GfwDnXPKiiZ49J5WnM2e16lqnctx2Gl8d_j92lh8BoLoiqRQm2wMMLJok7vC9_6UM4Ex9IHVLQVZ9gcD2mSAprI0J4Gq_VqsqOUtBW2BoFeHmfS2qB-ThI65oUcs3Dm6x3-oRXNiF-PYwWyMw057KO6Tvrhe1FfHvgsZKStQ2tfqN-2H6jyuu_30EVlEAklb5Ee3K__etqE-NVH8sxc9sfDa8tw9PNv_L0JlYdLJg53RkFfmN3JZti_KXpFoYRg8L-683JHJs0To0JwYiLLKr81KftRBA12CZ5Wy4iz1y6EntEply_rmoLBylNv4IuzUkTF_H-7u8fATnA
+
+

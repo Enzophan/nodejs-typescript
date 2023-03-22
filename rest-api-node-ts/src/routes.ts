@@ -1,14 +1,21 @@
 import { Express, Request, Response } from "express";
+import { createUserSessionHandler, getUserSessionHandler } from "./controllers/session.controller";
 import { createUserHandler } from "./controllers/user.controller";
+import deserializeUser from "./middleware/deserializeUser";
+import requireUser from "./middleware/requireUser";
 import validateResource from "./middleware/validateResource"
+import { createSessionSchema } from "./schema/session.schema";
 import { createUserSchema } from "./schema/user.schema";
+
 
 function routes(app: Express) {
     app.get('/healthcheck', (req: Request, res: Response) => {
         return res.sendStatus(200)
     })
 
-    app.post('/app/users', validateResource(createUserSchema), createUserHandler)
+    app.post('/api/users', validateResource(createUserSchema), createUserHandler);
+    app.post('/api/sessions', validateResource(createSessionSchema), createUserSessionHandler);
+    app.get('/api/sessions', requireUser, getUserSessionHandler);
 }
 
 export default routes
