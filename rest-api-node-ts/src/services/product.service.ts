@@ -10,11 +10,13 @@ interface ICreateProductInput {
     image: ProductDocument['image'];
 }
 
+export async function countProducts(query: FilterQuery<ProductDocument>) {
+    return ProductModel.count(query)
+}
 
 export async function findAllProducts(query: FilterQuery<ProductDocument>, options: QueryOptions = { lean: true }) {
     return ProductModel.find(query, {}, options)
 }
-
 
 export async function createProduct(input: ICreateProductInput) {
     return ProductModel.create(input)

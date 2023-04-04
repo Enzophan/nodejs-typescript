@@ -25,6 +25,20 @@ const params = {
     })
 }
 
+
+const queries = {
+    query: object({
+        q: string().optional(),
+        sort: string().optional(),
+        page: string().optional(),
+        limit: string().optional(),
+    })
+}
+
+export const searchProductSchema = object({
+    ...queries
+})
+
 export const createProductSchema = object({
     ...payload
 })
@@ -42,6 +56,7 @@ export const getProductSchema = object({
     ...params
 })
 
+export type SearchProductInput = TypeOf<typeof searchProductSchema>
 export type CreateProductInput = TypeOf<typeof createProductSchema>
 export type UpdateProductInput = TypeOf<typeof updateProductSchema>
 export type ReadProductInput = TypeOf<typeof getProductSchema>

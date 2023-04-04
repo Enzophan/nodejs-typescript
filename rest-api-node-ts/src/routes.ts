@@ -1,10 +1,10 @@
 import { Express, Request, Response } from "express";
-import { createProductHandler, deleteProductHandler, getAllProductsHandler, getProductHandler, updateProductHandler } from "./controllers/product.controller";
+import { createProductHandler, deleteProductHandler, getAllProductsHandler, getProductHandler, searchProductsHandler, updateProductHandler } from "./controllers/product.controller";
 import { createUserSessionHandler, deleteSessionHandler, getUserSessionHandler } from "./controllers/session.controller";
 import { createUserHandler } from "./controllers/user.controller";
 import requireUser from "./middleware/requireUser";
 import validateResource from "./middleware/validateResource"
-import { createProductSchema, deleteProductSchema, getProductSchema, updateProductSchema } from "./schema/product.schema";
+import { createProductSchema, deleteProductSchema, getProductSchema, searchProductSchema, updateProductSchema } from "./schema/product.schema";
 import { createSessionSchema } from "./schema/session.schema";
 import { createUserSchema } from "./schema/user.schema";
 
@@ -19,6 +19,7 @@ function routes(app: Express) {
     app.get('/api/sessions', requireUser, getUserSessionHandler);
     app.delete('/api/sessions', requireUser, deleteSessionHandler);
 
+    app.get('/api/products', validateResource(searchProductSchema), searchProductsHandler);
     app.get('/api/all-product', [requireUser], getAllProductsHandler);
     app.get('/api/product/:productId', [requireUser, validateResource(getProductSchema)], getProductHandler);
     app.post('/api/product', [requireUser, validateResource(createProductSchema)], createProductHandler);
