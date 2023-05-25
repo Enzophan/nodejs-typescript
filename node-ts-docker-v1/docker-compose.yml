@@ -12,9 +12,9 @@ services:
       - ./nodemon.json:/home/node/app/nodemon.json
     restart: always
     expose:
-      - '4000'
+      - '5001'
     ports:
-      - '4000:4000'
+      - '5001:4000'
     command: npm run dev
     links:
       - "mongo:database"

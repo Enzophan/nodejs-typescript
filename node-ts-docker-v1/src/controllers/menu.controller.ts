@@ -63,12 +63,19 @@ async function GetMenu(req: Request, res: Response, next: NextFunction) {
         },
       ],
     };
+    const posts = {
+      title: "Posts",
+      icon: "bi-stickies",
+      path: "/posts",
+    };
+
     const report = {
       title: "Report",
       icon: "bi-database-fill-check",
       path: "/report",
     };
-    return res.send([data, admin, report]);
+
+    return res.send([data, admin, posts, report]);
   } catch (error) {
     next();
   }
