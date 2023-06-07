@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { signJwt } from "../utils/jwt.util";
+import _ from "lodash";
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 
@@ -37,8 +37,8 @@ async function Register(req: Request, res: Response, next: NextFunction) {
       email: req.body.email,
       password: req.body.password,
     });
-
-    return res.send({ user });
+    const safeUser = _.omit(user.toJSON(), "password");
+    return res.send({ safeUser });
   } catch (error) {
     res.status(404).json({ message: (error as Error).message });
     next();
@@ -57,13 +57,13 @@ async function Refresh(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function ResetPassword(req: Request, res: Response, next: NextFunction) {}
+async function ResetPassword(req: Request, res: Response, next: NextFunction) { }
 
 async function ForgotPassword(
   req: Request,
   res: Response,
   next: NextFunction
-) {}
+) { }
 
 export default {
   Login,

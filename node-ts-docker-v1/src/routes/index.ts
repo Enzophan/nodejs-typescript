@@ -2,15 +2,17 @@ import { Express, Request, Response, NextFunction } from "express";
 import SidebarRoute from "./Sidebar.route";
 import AuthRoute from "./Auth.route";
 import UserRoute from "./User.route";
+import RoleRoute from "./Role.route";
 
 const routes = (app: Express) => {
   app.get("/api", (req: Request, res: Response) => {
     return res.send("Hello to API server");
   });
 
-  app.use("/api/v1/sidebar", SidebarRoute);
-  app.use("/api/v1/auth", AuthRoute);
-  app.use("/api/v1/user", UserRoute);
+  app.use("/api/sidebar", SidebarRoute);
+  app.use("/api/auth", AuthRoute);
+  app.use("/api/user", UserRoute);
+  app.use("/api/role", RoleRoute);
 
   app.get("/error", async (req: Request, res: Response) => {
     try {

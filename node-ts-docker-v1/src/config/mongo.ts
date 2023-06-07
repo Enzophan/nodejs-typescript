@@ -15,7 +15,7 @@ export default ({ db }: InputDB) => {
             .then(() => {
                 return console.log(`Successfully connected to ${db}`)
             })
-            .catch((err) => {
+            .catch((err: Error) => {
                 console.error(`Error connecting to database: ${err}`);
                 console.error(`Database: ${db}`);
                 return process.exit(1);

@@ -38,7 +38,7 @@ async function createUser({
     })
     .catch((error: Error) => {
       throw error;
-    });
+    });  
 }
 
 async function updateUser(

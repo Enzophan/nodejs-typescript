@@ -1,11 +1,14 @@
 import mongoose, { Schema, Document } from "mongoose";
 import bcrypt from "bcrypt";
+import { IRole } from "./Role";
 
 export interface IUser extends Document {
   email: String;
   firstName: String;
   lastName: String;
   password: String;
+  useType: String;
+  role?: IRole["_id"];
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
@@ -35,6 +38,15 @@ const UserSchema: Schema = new Schema(
       require: true,
       trim: true,
     },
+    useType: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user'
+    },
+    role: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Role",
+    }
   },
   {
     timestamps: true,
