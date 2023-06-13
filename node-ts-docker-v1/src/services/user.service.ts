@@ -13,7 +13,7 @@ async function findUser(
   query: FilterQuery<IUser>,
   options: QueryOptions = { lean: true }
 ) {
-  return User.findOne(query, { password: 0, __v: 0 }, options);
+  return User.findOne(query, { password: 0, __v: 0 }, options).populate('role', 'name modules isExpired');
 }
 
 async function getAllUsers(): Promise<IUser[]> {
@@ -38,7 +38,7 @@ async function createUser({
     })
     .catch((error: Error) => {
       throw error;
-    });  
+    });
 }
 
 async function updateUser(
