@@ -7,6 +7,7 @@ interface ICreateUserInput {
   firstName: IUser["firstName"];
   lastName: IUser["lastName"];
   password: IUser["password"];
+  useType?: IUser["useType"];
 }
 
 async function findUser(
@@ -31,8 +32,9 @@ async function createUser({
   firstName,
   lastName,
   password,
+  useType
 }: ICreateUserInput): Promise<IUser> {
-  return User.create({ email, firstName, lastName, password })
+  return User.create({ email, firstName, lastName, password, useType })
     .then((data: IUser) => {
       return data;
     })

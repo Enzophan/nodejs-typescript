@@ -1,6 +1,23 @@
 import { Request, Response, NextFunction } from "express";
 import UserService from "../services/user.service";
 
+
+async function initAdminUser(req: Request, res: Response, next: NextFunction) {
+  try {
+    const user = await UserService.createUser({
+      firstName: "admin",
+      lastName: "",
+      email: "nhanplh@gmail.com",
+      password: "password@12345",
+      useType: "admin"
+    });
+    return res.send({ user });
+  } catch (error) {
+    res.status(400).json({ message: (error as Error).message });
+    next();
+  }
+}
+
 async function getUser(req: Request, res: Response, next: NextFunction) {
   try {
     let userId = req.params.id;
@@ -73,7 +90,7 @@ async function deleteUser(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function ResetPassword(req: Request, res: Response, next: NextFunction) {}
+async function ResetPassword(req: Request, res: Response, next: NextFunction) { }
 
 export default {
   getUser,
@@ -81,4 +98,5 @@ export default {
   createUser,
   updateUser,
   deleteUser,
+  initAdminUser
 };

@@ -23,11 +23,12 @@ const hasPermission = ({ type, moduleName, actionName }: IHasPermission) => {
         const user = res.locals.user;
         const foundUser = await userService.findUser({ _id: user._id });
         if (!foundUser) return res.status(404).json({ message: "User not found" });
+        if (foundUser.useType === 'admin') return next();
+
+        if (!foundUser.role) return res.status(403).json({ message: "User doesn't have permission" });
+        if (foundUser.useType !== type) return res.status(403).json({ message: "User doesn't have permission" });
+
         const userRoles = foundUser.role;
-        const userType = foundUser.useType;
-
-        if(userType !== type) return res.status(403).json({ message: "User doesn't have permission" });
-
         const allowModule = userRoles.modules.find((module: IModule) => {
             if (module.key === moduleName.toLowerCase()) return module
         })

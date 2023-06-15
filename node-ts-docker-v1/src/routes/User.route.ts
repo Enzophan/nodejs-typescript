@@ -7,7 +7,7 @@ import { USERTYPE, MODULES, ACTIONS } from '../utils/enums'
 const router = express.Router();
 
 
-// router.get("/", UserController.getAllUsers);
+router.get("/init", UserController.initAdminUser);
 router.get("/", requiredUser, UserController.getUser);
 router.get("/find/:id", requiredUser, hasPermission({ type: USERTYPE.ADMIN, moduleName: MODULES.USER, actionName: ACTIONS.VIEW }), UserController.getUser);
 router.get("/all", requiredUser, hasPermission({ type: USERTYPE.USER, moduleName: MODULES.USER, actionName: ACTIONS.VIEW }), UserController.getAllUsers);
