@@ -18,12 +18,6 @@ interface IModule {
     actions: IAction[]
 }
 
-interface IRole {
-    name: String;
-    modules: IModule[];
-    isExpired: Boolean;
-}
-
 const hasPermission = ({ type, moduleName, actionName }: IHasPermission) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         const user = res.locals.user;
