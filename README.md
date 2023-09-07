@@ -1,2 +1,1 @@
-# nodejs-example
-# nodejs-example
+# node by TypeScript
