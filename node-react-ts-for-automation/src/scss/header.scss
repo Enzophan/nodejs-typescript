@@ -1,0 +1,27 @@
+.header {
+  background-color: $headerBg;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  max-height: 15vh;
+  display: block;
+  transition: top 0.3s;
+  z-index: 2;
+
+  .nav-header {
+    .item-nav-header {
+      cursor: pointer;
+      float: left;
+      display: block;
+      color: $lightBg;
+      text-align: center;
+      padding: 1rem;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    .item-nav-header.active {
+      background-color: $lightBg;
+      color: $headerBg;
+    }
+  }
+}
