@@ -1,1 +1,13 @@
+GET http://localhost:4000/healthcheck HTTP/1.1
+
+
+###
 GET http://localhost:4000/api/products?sort=desc&q=LG OLED—for&page=1&limit=5 HTTP/1.1
+
+
+###
+GET http://localhost:4000/api/v2/products?sort=price,desc&q=LG&page=1&limit=20&genre=technology HTTP/1.1
+
+
+###
+POST  http://localhost:4000/api/v2/products HTTP/1.1

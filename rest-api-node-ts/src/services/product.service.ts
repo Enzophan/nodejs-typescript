@@ -8,6 +8,8 @@ interface ICreateProductInput {
     description: ProductDocument['description'];
     price: ProductDocument['price'];
     image: ProductDocument['image'];
+    rating: ProductDocument['rating'];
+    genre: ProductDocument['genre'];
 }
 
 export async function countProducts(query: FilterQuery<ProductDocument>) {

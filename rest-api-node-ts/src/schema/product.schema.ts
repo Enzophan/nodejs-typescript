@@ -14,6 +14,9 @@ const payload = {
         image: string({
             required_error: "Image is required"
         }),
+        genre: string({
+            required_error: "Genre is required"
+        }),
     })
 }
 
@@ -32,6 +35,7 @@ const queries = {
         sort: string().optional(),
         page: string().optional(),
         limit: string().optional(),
+        genre: string().optional(),
     })
 }
 
