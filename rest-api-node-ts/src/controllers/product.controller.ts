@@ -46,12 +46,16 @@ export async function newSearchProductsHandler(req: Request<{}, {}, {}, SearchPr
         const search: string = req.query.q || "";
         let sort: string | string[] | undefined = req.query.sort ?? "rating";
         let genre: string | string[] | undefined = req.query.genre ?? "All";
+        let tags: string | string[] | undefined = req.query.tags ?? "All";
 
         let query = {};
         let options = {};
 
         // const genreOptions = ["action", "music", "technology", "life", "movie"];
-        genre === "All" ? (genre = []) : (genre = req.query.genre?.split(","));
+        const genreOptions: string[] = Object.values(GENRE);
+        genre === "All" ? (genre = [...genreOptions]) : (genre = req.query.genre?.split(","));
+
+        tags === "All" ? (tags = []) : (tags = req.query.tags?.split(","));
 
         if (search) {
             query = {
@@ -82,6 +86,12 @@ export async function newSearchProductsHandler(req: Request<{}, {}, {}, SearchPr
             countQuery = { ...countQuery, "genre": { $in: genre } };
             query = { ...query, "genre": { $in: genre } }
         };
+
+        if (req.query.tags) {
+            countQuery = { ...countQuery, "tags": { $in: tags } };
+            query = { ...query, "tags": { $in: tags } }
+        };
+
         // console.log("countQuery ", countQuery)
         // console.log("query ", query)
         // console.log("options ", options)

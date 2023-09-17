@@ -1,4 +1,7 @@
-import { number, object, string, TypeOf } from 'zod';
+import { array, number, object, string, TypeOf } from 'zod';
+import { GENRE } from '../utils/enums';
+
+const genre: string[] = Object.values(GENRE);
 
 const payload = {
     body: object({
@@ -16,6 +19,14 @@ const payload = {
         }),
         genre: string({
             required_error: "Genre is required"
+        }).refine((val) => genre.includes(val), {
+            message: "Genre do not match",
+            path: ['genre']
+        }),
+        tags: string({
+            required_error: "Tag is required"
+        }).array().nonempty({
+            message: "Tags can't be empty!",
         }),
     })
 }
@@ -36,6 +47,7 @@ const queries = {
         page: string().optional(),
         limit: string().optional(),
         genre: string().optional(),
+        tags: string().optional(),
     })
 }
 
