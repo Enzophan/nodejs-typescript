@@ -17,7 +17,7 @@ export async function countProducts(query: FilterQuery<ProductDocument>) {
 }
 
 export async function findAllProducts(query: FilterQuery<ProductDocument>, options: QueryOptions = { lean: true }) {
-    return ProductModel.find(query, {}, options)
+    return ProductModel.find(query, { _id: 1, productId: 1, title: 1, price: 1, image: 1 }, options)
 }
 
 export async function createProduct(input: ICreateProductInput) {

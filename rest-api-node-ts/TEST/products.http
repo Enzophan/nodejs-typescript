@@ -10,4 +10,7 @@ GET http://localhost:4000/api/v2/products?sort=price,asc&q=Apple&page=1&limit=20
 
 
 ###
+GET http://localhost:4000/api/v2/products
+
+###
 POST  http://localhost:4000/api/v2/products HTTP/1.1

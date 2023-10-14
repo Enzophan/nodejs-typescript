@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import { CreateProductInput, SearchProductInput, UpdateProductInput } from '../schema/product.schema';
+import { CreateProductInput, FindProductIds, SearchProductInput, UpdateProductInput } from '../schema/product.schema';
 import { createProduct, deleteProduct, findAndUpdateProduct, findProduct, findAllProducts, countProducts } from '../services/product.service';
 import { GENRE } from '../utils/enums';
-
 
 export async function searchProductsHandler(req: Request<{}, {}, {}, SearchProductInput["query"]>, res: Response) {
     try {
@@ -42,7 +41,7 @@ export async function searchProductsHandler(req: Request<{}, {}, {}, SearchProdu
 export async function newSearchProductsHandler(req: Request<{}, {}, {}, SearchProductInput["query"]>, res: Response) {
     try {
         const page: number = parseInt(req.query.page as any) || 1;
-        const limit: number = parseInt(req.query.limit as any) || 5;
+        const limit: number = parseInt(req.query.limit as any) || 20;
         const search: string = req.query.q || "";
         let sort: string | string[] | undefined = req.query.sort ?? "rating";
         let genre: string | string[] | undefined = req.query.genre ?? "All";
@@ -104,6 +103,28 @@ export async function newSearchProductsHandler(req: Request<{}, {}, {}, SearchPr
         res.status(500).json({ error: true, message: "Internal Server Error" })
     }
 }
+
+
+export async function getProductsByIdHandler(req: Request<{}, {}, {}, FindProductIds["query"]>, res: Response) {
+    try {
+        const ids: string[] = (req.query.productIds as string).split(',');
+        let query = {};
+        let options = {};
+        if (ids.length > 0) {
+            query = {
+                ...query,
+                productId: {
+                    $in: [...ids]
+                }
+            }
+        };
+        const products = await findAllProducts(query, options);
+        return res.send(products);
+    } catch (error) {
+        res.status(500).json({ error: true, message: "Internal Server Error" })
+    }
+}
+
 
 export async function getAllProductsHandler(req: Request<UpdateProductInput["params"]>, res: Response) {
     const userId = res.locals.user._id;

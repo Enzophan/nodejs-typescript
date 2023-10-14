@@ -1,10 +1,10 @@
 import { Express, Request, Response } from "express";
-import { createProductHandler, deleteProductHandler, getAllProductsHandler, getProductHandler, newSearchProductsHandler, searchProductsHandler, updateProductHandler } from "./controllers/product.controller";
+import { createProductHandler, deleteProductHandler, getAllProductsHandler, getProductHandler, getProductsByIdHandler, newSearchProductsHandler, searchProductsHandler, updateProductHandler } from "./controllers/product.controller";
 import { createUserSessionHandler, deleteSessionHandler, getUserSessionHandler } from "./controllers/session.controller";
 import { createUserHandler } from "./controllers/user.controller";
 import requireUser from "./middleware/requireUser";
 import validateResource from "./middleware/validateResource"
-import { createProductSchema, deleteProductSchema, getProductSchema, searchProductSchema, updateProductSchema } from "./schema/product.schema";
+import { createProductSchema, deleteProductSchema, findProductIdsSchema, getProductSchema, searchProductSchema, updateProductSchema } from "./schema/product.schema";
 import { createSessionSchema } from "./schema/session.schema";
 import { createUserSchema } from "./schema/user.schema";
 
@@ -26,6 +26,8 @@ function routes(app: Express) {
     app.post('/api/product', [requireUser, validateResource(createProductSchema)], createProductHandler);
     app.put('/api/product/:productId', [requireUser, validateResource(updateProductSchema)], updateProductHandler);
     app.delete('/api/product/:productId', [requireUser, validateResource(deleteProductSchema)], deleteProductHandler);
+
+    app.get('/api/cart',validateResource(findProductIdsSchema), getProductsByIdHandler);
 }
 
 export default routes

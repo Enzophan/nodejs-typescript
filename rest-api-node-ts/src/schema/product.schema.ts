@@ -51,6 +51,13 @@ const queries = {
     })
 }
 
+const findIds = {
+    query: object({
+        productIds: string().optional(),
+    })
+}
+
+
 export const searchProductSchema = object({
     ...queries
 })
@@ -72,8 +79,13 @@ export const getProductSchema = object({
     ...params
 })
 
+export const findProductIdsSchema = object({
+    ...findIds
+})
+
 export type SearchProductInput = TypeOf<typeof searchProductSchema>
 export type CreateProductInput = TypeOf<typeof createProductSchema>
 export type UpdateProductInput = TypeOf<typeof updateProductSchema>
 export type ReadProductInput = TypeOf<typeof getProductSchema>
 export type DeleteProductInput = TypeOf<typeof deleteProductSchema>
+export type FindProductIds = TypeOf<typeof findProductIdsSchema>
