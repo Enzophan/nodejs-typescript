@@ -19,6 +19,7 @@ const deserializeUser = async (req: Request, res: Response, next: NextFunction) 
     }
 
     if (expired && refreshToken) {
+        console.log("Refresh Token!", new Date().toLocaleDateString())
         const newAccessToken = await reIssueAccessToken({ refreshToken });
 
         if (newAccessToken) {

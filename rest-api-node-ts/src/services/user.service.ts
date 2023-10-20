@@ -18,7 +18,7 @@ export async function createUser(input: ICreateUserInput) {
 }
 
 export async function validatePassword({ email, password }: { email: string; password: string }) {
-    const user = await UserModel.findOne({ email });
+    const user = await UserModel.findOne({ email }, { _id: 1, email: 1, firstname: 1, lastname: 1, password: 1 });
     if (!user) return false;
 
     const isValid = await user.comparePassword(password);

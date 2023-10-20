@@ -13,8 +13,8 @@ function routes(app: Express) {
     app.get('/healthcheck', (req: Request, res: Response) => {
         return res.sendStatus(200)
     })
-
     app.post('/api/users', validateResource(createUserSchema), createUserHandler);
+    // Login
     app.post('/api/sessions', validateResource(createSessionSchema), createUserSessionHandler);
     app.get('/api/sessions', requireUser, getUserSessionHandler);
     app.delete('/api/sessions', requireUser, deleteSessionHandler);
