@@ -132,13 +132,27 @@ export async function getAllProductsHandler(req: Request<UpdateProductInput["par
     return res.send(products);
 }
 
+export async function getProductPublicHandler(req: Request<UpdateProductInput["params"]>, res: Response) {
+    try {
+        const productId = req.params.productId;
+        const product = await findProduct({ productId }, { _id: 0, createdAt: 0, updatedAt: 0 });
+        if (!product) return res.status(404).json({ error: true, message: "Not found" });
+        return res.send({ data: product });
+    } catch (error) {
+        res.status(500).json({ error: true, message: "Internal Server Error" })
+    }
+}
 
 export async function getProductHandler(req: Request<UpdateProductInput["params"]>, res: Response) {
-    const productId = req.params.productId;
-    const product = await findProduct({ productId });
-    if (!product) return res.sendStatus(404);
+    try {
+        const productId = req.params.productId;
+        const product = await findProduct({ productId });
+        if (!product) return res.status(404).json({ error: true, message: "Not found" });
+        return res.send({ data: product });
+    } catch (error) {
+        res.status(500).json({ error: true, message: "Internal Server Error" })
 
-    return res.send(product);
+    }
 }
 
 export async function createProductHandler(req: Request<{}, {}, CreateProductInput["body"]>, res: Response) {

@@ -1,5 +1,5 @@
 import { Express, Request, Response } from "express";
-import { createProductHandler, deleteProductHandler, getAllProductsHandler, getProductHandler, getProductsByIdHandler, newSearchProductsHandler, searchProductsHandler, updateProductHandler } from "./controllers/product.controller";
+import { createProductHandler, deleteProductHandler, getAllProductsHandler, getProductHandler, getProductPublicHandler, getProductsByIdHandler, newSearchProductsHandler, searchProductsHandler, updateProductHandler } from "./controllers/product.controller";
 import { createUserSessionHandler, deleteSessionHandler, getUserSessionHandler } from "./controllers/session.controller";
 import { createUserHandler } from "./controllers/user.controller";
 import requireUser from "./middleware/requireUser";
@@ -21,6 +21,8 @@ function routes(app: Express) {
 
     app.get('/api/products', validateResource(searchProductSchema), searchProductsHandler);
     app.get('/api/v2/products', validateResource(searchProductSchema), newSearchProductsHandler);
+    app.get('/api/v2/product/:productId',validateResource(getProductSchema), getProductPublicHandler);
+
     app.get('/api/all-product', [requireUser], getAllProductsHandler);
     app.get('/api/product/:productId', [requireUser, validateResource(getProductSchema)], getProductHandler);
     app.post('/api/product', [requireUser, validateResource(createProductSchema)], createProductHandler);
