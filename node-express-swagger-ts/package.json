@@ -1,0 +1,36 @@
+{
+  "name": "express-swagger-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc -w & nodemon dist/app.js",
+    "dev:win": "start /b tsc -w & nodemon dist/app.js",
+    "schemas:openapi": "swagger-jsdoc -d src/routes/definition.yaml src/routes/*.ts \"src/routes/!(definition).yaml\" -o src/schemas/openapi.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-openapi-validator": "^5.3.7",
+    "helmet": "^8.0.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/helmet": "^4.0.0",
+    "@types/swagger-ui-express": "^4.1.6",
+    "copyfiles": "^2.4.1",
+    "nodemon": "^3.1.7",
+    "openapi-typescript": "^7.4.1",
+    "swagger-jsdoc": "^6.2.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
