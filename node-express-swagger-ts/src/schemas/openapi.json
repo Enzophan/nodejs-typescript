@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Calculator API",
-    "version": "1.0.0"
+    "title": "Calculator API docs - for testing",
+    "version": "2.0.1"
   },
   "tags": [
     {
@@ -16,7 +16,7 @@
   ],
   "externalDocs": {
     "url": "https://enzophan.github.io/",
-    "description": "My Calculator documentation"
+    "description": "My calculator documentation"
   },
   "paths": {
     "/calculator": {
@@ -178,7 +178,7 @@
             }
           },
           "500": {
-            "$ref": "#/components/schemas/HealthStatus"
+            "$ref": "#/components/responses/InternalServerError"
           }
         }
       }
@@ -257,7 +257,7 @@
         }
       },
       "HealthStatus": {
-        "descriptions": "Health check status",
+        "description": "Health check status",
         "type": "object",
         "required": [
           "status",
@@ -270,10 +270,10 @@
               "OK"
             ]
           },
-          "timestampp": {
+          "timestamp": {
             "type": "integer",
             "description": "Number of milliseconds since Epoch time",
-            "example": 1728152897000
+            "example": 1688612539479
           }
         }
       }

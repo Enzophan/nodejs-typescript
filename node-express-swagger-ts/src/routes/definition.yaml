@@ -1,12 +1,12 @@
 openapi: '3.0.3'
 info:
-  title: 'Calculator API'
-  version: '1.0.0'
+  title: 'Calculator API docs - for testing'
+  version: '2.0.1'
 tags:
   - name: health
     description: Health check
   - name: calculator
     description: Calculator operations
 externalDocs:
-  url: "https://enzophan.github.io/"
-  description: My Calculator documentation
+  url: https://enzophan.github.io/
+  description: My calculator documentation

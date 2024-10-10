@@ -4,182 +4,268 @@
  */
 
 export interface paths {
-  "/calculator": {
-    /** @description Get all calculations */
-    get: operations["getAllCalculations"];
-    /** @description Create a calculation */
-    post: operations["createCalculation"];
-  };
-  "/calculator/{id}": {
-    /** @description Get calculation by ID */
-    get: operations["getCalculationById"];
-    /** @description Update a calculation */
-    put: operations["updateCalculation"];
-    /** @description Delete calculation by ID */
-    delete: operations["deleteCalculationById"];
-  };
-  "/health": {
-    /** @description Health check endpoint for Calculator API */
-    get: operations["healthCheck"];
-  };
+    "/calculator": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Get all calculations */
+        get: operations["getAllCalculations"];
+        put?: never;
+        /** @description Create a calculation */
+        post: operations["createCalculation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/calculator/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Get calculation by ID */
+        get: operations["getCalculationById"];
+        /** @description Update a calculation */
+        put: operations["updateCalculation"];
+        post?: never;
+        /** @description Delete calculation by ID */
+        delete: operations["deleteCalculationById"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/health": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Health check endpoint for Calculator API */
+        get: operations["healthCheck"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
-
 export type webhooks = Record<string, never>;
-
 export interface components {
-  schemas: {
-    /** @description Calculation command */
-    CalculatorCommand: {
-      /** @enum {string} */
-      operator: "+" | "-" | "*" | "/";
-      operand1: number;
-      operand2: number;
+    schemas: {
+        /** @description Calculation command */
+        CalculatorCommand: {
+            /** @enum {string} */
+            operator: "+" | "-" | "*" | "/";
+            operand1: number;
+            operand2: number;
+        };
+        /** @description Calculation result */
+        CalculatorResult: components["schemas"]["CalculatorCommand"] & {
+            /** @description Unique ID of the calculation */
+            id: string;
+            result?: number;
+            message?: string;
+            /**
+             * @description Number of milliseconds since Epoch time
+             * @example 1688612539479
+             */
+            timestamp: number;
+        };
+        ErrorModel: {
+            message: string;
+        };
+        /** @description Health check status */
+        HealthStatus: {
+            /** @enum {string} */
+            status: "OK";
+            /**
+             * @description Number of milliseconds since Epoch time
+             * @example 1688612539479
+             */
+            timestamp: number;
+        };
     };
-    /** @description Calculation result */
-    CalculatorResult: components["schemas"]["CalculatorCommand"] & {
-      /** @description Unique ID of the calculation */
-      id: string;
-      result?: number;
-      message?: string;
-      /**
-       * @description Number of milliseconds since Epoch time
-       * @example 1688612539479
-       */
-      timestamp: number;
+    responses: {
+        /** @description Internal server error */
+        InternalServerError: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorModel"];
+            };
+        };
+        /** @description Not found error */
+        NotFoundError: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorModel"];
+            };
+        };
     };
-    ErrorModel: {
-      message: string;
+    parameters: {
+        /** @description Calculator ID */
+        CalculatorId: string;
     };
-    /** @description Health check status */
-    HealthStatus: {
-      /** @enum {string} */
-      status: "OK";
-      /**
-       * @description Number of milliseconds since Epoch time
-       * @example 1688612539479
-       */
-      timestamp: number;
+    requestBodies: {
+        /** @description Calculator command request body */
+        CalculatorCommand: {
+            content: {
+                "application/json": components["schemas"]["CalculatorCommand"];
+            };
+        };
     };
-  };
-  responses: {
-    /** @description Internal server error */
-    InternalServerError: {
-      content: {
-        "application/json": components["schemas"]["ErrorModel"];
-      };
-    };
-    /** @description Not found error */
-    NotFoundError: {
-      content: {
-        "application/json": components["schemas"]["ErrorModel"];
-      };
-    };
-  };
-  parameters: {
-    /** @description Calculator ID */
-    CalculatorId: string;
-  };
-  requestBodies: {
-    /** @description Calculator command request body */
-    CalculatorCommand: {
-      content: {
-        "application/json": components["schemas"]["CalculatorCommand"];
-      };
-    };
-  };
-  headers: never;
-  pathItems: never;
+    headers: never;
+    pathItems: never;
 }
-
-export type external = Record<string, never>;
-
+export type $defs = Record<string, never>;
 export interface operations {
-  /** @description Get all calculations */
-  getAllCalculations: {
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": components["schemas"]["CalculatorResult"][];
+    getAllCalculations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      500: components["responses"]["InternalServerError"];
-    };
-  };
-  /** @description Create a calculation */
-  createCalculation: {
-    requestBody: components["requestBodies"]["CalculatorCommand"];
-    responses: {
-      /** @description Created */
-      201: {
-        content: {
-          "application/json": components["schemas"]["CalculatorResult"];
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculatorResult"][];
+                };
+            };
+            500: components["responses"]["InternalServerError"];
         };
-      };
-      500: components["responses"]["InternalServerError"];
     };
-  };
-  /** @description Get calculation by ID */
-  getCalculationById: {
-    parameters: {
-      path: {
-        id: components["parameters"]["CalculatorId"];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": components["schemas"]["CalculatorResult"];
+    createCalculation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      404: components["responses"]["NotFoundError"];
-      500: components["responses"]["InternalServerError"];
-    };
-  };
-  /** @description Update a calculation */
-  updateCalculation: {
-    parameters: {
-      path: {
-        id: components["parameters"]["CalculatorId"];
-      };
-    };
-    requestBody: components["requestBodies"]["CalculatorCommand"];
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": components["schemas"]["CalculatorResult"];
+        requestBody: components["requestBodies"]["CalculatorCommand"];
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculatorResult"];
+                };
+            };
+            500: components["responses"]["InternalServerError"];
         };
-      };
-      404: components["responses"]["NotFoundError"];
-      500: components["responses"]["InternalServerError"];
     };
-  };
-  /** @description Delete calculation by ID */
-  deleteCalculationById: {
-    parameters: {
-      path: {
-        id: components["parameters"]["CalculatorId"];
-      };
-    };
-    responses: {
-      /** @description Deleted */
-      204: never;
-      404: components["responses"]["NotFoundError"];
-      500: components["responses"]["InternalServerError"];
-    };
-  };
-  /** @description Health check endpoint for Calculator API */
-  healthCheck: {
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": components["schemas"]["HealthStatus"];
+    getCalculationById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Calculator ID */
+                id: components["parameters"]["CalculatorId"];
+            };
+            cookie?: never;
         };
-      };
-      500: components["responses"]["InternalServerError"];
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculatorResult"];
+                };
+            };
+            404: components["responses"]["NotFoundError"];
+            500: components["responses"]["InternalServerError"];
+        };
     };
-  };
+    updateCalculation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Calculator ID */
+                id: components["parameters"]["CalculatorId"];
+            };
+            cookie?: never;
+        };
+        requestBody: components["requestBodies"]["CalculatorCommand"];
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculatorResult"];
+                };
+            };
+            404: components["responses"]["NotFoundError"];
+            500: components["responses"]["InternalServerError"];
+        };
+    };
+    deleteCalculationById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Calculator ID */
+                id: components["parameters"]["CalculatorId"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            404: components["responses"]["NotFoundError"];
+            500: components["responses"]["InternalServerError"];
+        };
+    };
+    healthCheck: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HealthStatus"];
+                };
+            };
+            500: components["responses"]["InternalServerError"];
+        };
+    };
 }
